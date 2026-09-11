@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://asif3761.github.io/SOLENNE-VANE/sitemap.xml

@@ -1,0 +1,1033 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solenne Vane — Dresses &amp; Accessories, Made to Order</title>
+<meta name="description" content="Solenne Vane: dresses and accessories worked in garnet velvet, brass and aged leather, made to order in a small workroom.">
+<link rel="canonical" href="https://asif3761.github.io/SOLENNE-VANE/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Solenne Vane — Dresses &amp; Accessories, Made to Order">
+<meta property="og:description" content="Dresses and accessories cut in garnet velvet, brass and aged leather. Made to order.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   Solenne Vane — core stylesheet
+   Dark opulent, re-art-directed: garnet + brass, didone display type,
+   centered symmetric nav, vertical helix motion instead of a flat orbit ring.
+   ========================================================================== */
+
+:root {
+  --ink:        #0c0a08;
+  --ink-raised: #171210;
+  --garnet:     #4a0f16;
+  --garnet-deep:#2b070c;
+  --brass:      #b8895a;
+  --brass-lt:   #dba876;
+  --glint:      #c99566;
+  --paper:      #efe6d8;
+  --paper-dim:  #b7ab9c;
+  --ash:        #6b5f54;
+  --line:       rgba(201, 149, 102, 0.22);
+
+  --font-display: "Bodoni Moda", "Didot", "Georgia", serif;
+  --font-body: "Manrope", "Helvetica Neue", sans-serif;
+
+  --container: 1280px;
+  --radius: 2px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+::selection { background: var(--garnet); color: var(--paper); }
+:focus-visible { outline: 1.5px solid var(--brass-lt); outline-offset: 3px; }
+
+.wrap { max-width: var(--container); margin: 0 auto; padding: 0 44px; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.08;
+  margin: 0;
+  color: var(--paper);
+}
+p { line-height: 1.75; color: var(--paper-dim); margin: 0; }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brass-lt);
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 30px;
+  border: 1px solid var(--brass);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: transparent;
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+.btn:hover { background: var(--brass); color: var(--ink); }
+.btn.solid { background: var(--garnet); border-color: var(--garnet); color: var(--paper); }
+.btn.solid:hover { background: var(--brass); border-color: var(--brass); color: var(--ink); }
+.btn.ghost { border-color: var(--line); color: var(--paper-dim); }
+.btn.ghost:hover { border-color: var(--brass-lt); color: var(--paper); background: transparent; }
+
+/* ---------- nav (centered word-mark, symmetric) ---------- */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 30px 44px;
+  background: linear-gradient(to bottom, rgba(12,10,8,0.92), transparent);
+  transition: padding 0.4s ease, background 0.4s ease;
+}
+.site-nav.scrolled {
+  padding: 16px 44px;
+  background: rgba(12, 10, 8, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.brand {
+  font-family: var(--font-display);
+  font-size: 23px;
+  letter-spacing: 0.06em;
+  text-align: center;
+  grid-column: 2;
+}
+.brand em { font-style: italic; color: var(--brass-lt); }
+.nav-links { display: flex; gap: 30px; align-items: center; justify-content: flex-start; }
+.nav-links.right { justify-content: flex-end; }
+.nav-links a {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+  position: relative;
+  padding-bottom: 4px;
+}
+.nav-links a::after {
+  content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 0;
+  background: var(--brass-lt); transition: width 0.35s ease;
+}
+.nav-links a:hover { color: var(--paper); }
+.nav-links a:hover::after, .nav-links a.current::after { width: 100%; }
+.nav-links a.current { color: var(--paper); }
+.bag-btn {
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--paper-dim); border: 1px solid var(--line); padding: 9px 15px;
+  border-radius: var(--radius); transition: border-color 0.3s ease, color 0.3s ease;
+}
+.bag-btn:hover { border-color: var(--brass-lt); color: var(--paper); }
+.nav-toggle {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 34px; height: 34px; background: none; border: none; cursor: pointer; padding: 0;
+}
+.nav-toggle span { display: block; height: 1px; width: 100%; background: var(--paper); transition: transform 0.3s ease, opacity 0.3s ease; }
+.nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-nav {
+  position: fixed; inset: 0; z-index: 800;
+  background: rgba(12,10,8,0.98);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+  opacity: 0; pointer-events: none; transition: opacity 0.35s ease;
+}
+.mobile-nav.open { opacity: 1; pointer-events: auto; }
+.mobile-nav a { font-family: var(--font-display); font-size: 27px; color: var(--paper-dim); }
+.mobile-nav a:hover, .mobile-nav a.current { color: var(--brass-lt); }
+
+/* ---------- hero: spotlight + vertical helix ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  padding: 170px 44px 90px;
+  overflow: hidden;
+  background: var(--ink);
+}
+.hero-spotlight {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle 620px at var(--sx, 50%) var(--sy, 40%), rgba(74,15,22,0.38), transparent 60%);
+  transition: background 0.15s ease-out;
+}
+.hero-copy { position: relative; z-index: 2; max-width: 560px; }
+.hero-copy .eyebrow { display: block; margin-bottom: 24px; }
+.hero-copy h1 {
+  font-size: clamp(44px, 6vw, 78px);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.hero-copy h1 em { font-style: italic; color: var(--brass-lt); text-transform: none; }
+.hero-copy p.lede { margin-top: 28px; font-size: 17px; max-width: 440px; }
+.hero-actions { display: flex; gap: 16px; margin-top: 42px; }
+
+.helix-stage { position: relative; height: 640px; perspective: 1600px; z-index: 2; }
+.helix-anchor { position: absolute; inset: 0; transform-style: preserve-3d; }
+.helix-axis {
+  position: absolute; left: 50%; top: 6%; bottom: 6%; width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--line) 15%, var(--line) 85%, transparent);
+}
+.helix-tier-label {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.helix-tier-label .eyebrow { display: block; margin-bottom: 6px; }
+.helix-tier-label .num { font-family: var(--font-display); font-size: 34px; font-style: italic; color: var(--paper); }
+.helix-tier {
+  position: absolute;
+  left: 0; right: 0;
+}
+.helix-item {
+  position: absolute; top: 0; left: 50%; width: 96px; will-change: transform, opacity;
+}
+.helix-item figure {
+  margin: 0; border: 1px solid var(--line); background: var(--ink-raised); padding: 5px; border-radius: var(--radius);
+}
+.helix-item img { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
+.helix-item figcaption {
+  margin-top: 7px; font-size: 10px; letter-spacing: 0.04em; color: var(--paper-dim);
+  text-align: center; text-transform: uppercase;
+}
+
+.scroll-cue {
+  position: absolute; left: 44px; bottom: 36px;
+  display: flex; align-items: center; gap: 12px; color: var(--ash); font-size: 11px;
+  letter-spacing: 0.1em; text-transform: uppercase; z-index: 2;
+}
+.scroll-cue .line { width: 1px; height: 40px; background: var(--line); position: relative; overflow: hidden; }
+.scroll-cue .line::after {
+  content: ""; position: absolute; left: 0; top: -100%; width: 100%; height: 100%; background: var(--brass-lt);
+  animation: cue 2.6s ease-in-out infinite;
+}
+@keyframes cue { 50% { top: 100%; } 100% { top: 100%; } }
+
+/* ---------- ticker band ---------- */
+.ticker-band {
+  background: var(--garnet-deep);
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  padding: 22px 0; overflow: hidden; white-space: nowrap;
+}
+.ticker-track { display: inline-flex; gap: 70px; animation: ticker 30s linear infinite; }
+.ticker-band span {
+  font-family: var(--font-display); font-style: italic; font-size: 20px;
+  color: var(--paper-dim); text-transform: uppercase; letter-spacing: 0.04em;
+}
+.ticker-band span b { color: var(--brass-lt); font-style: normal; margin: 0 6px; }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ---------- section shell ---------- */
+.section { padding: 130px 0; }
+.section.tight { padding: 96px 0; }
+
+/* ---------- featured: asymmetric editorial spread ---------- */
+.featured-head { margin-bottom: 60px; max-width: 640px; }
+.featured-head .eyebrow { display: block; margin-bottom: 16px; }
+.featured-head h2 { font-size: clamp(32px, 4vw, 50px); text-transform: uppercase; }
+.featured-head p { margin-top: 20px; }
+
+.editorial-spread {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2px;
+  background: var(--line);
+}
+.spread-hero {
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.spread-hero .simg-wrap { overflow: hidden; }
+.spread-hero img {
+  width: 100%; aspect-ratio: 3/4; object-fit: cover;
+  transition: transform 1s cubic-bezier(.2,.8,.2,1);
+}
+.spread-hero:hover img { transform: scale(1.05); }
+.spread-hero .sinfo { padding: 26px 30px; }
+.spread-hero h3 { font-size: 26px; text-transform: uppercase; margin-bottom: 8px; }
+.spread-hero .sprice { color: var(--brass-lt); font-size: 15px; }
+
+.spread-list { background: var(--ink); display: flex; flex-direction: column; }
+.spread-row {
+  display: grid; grid-template-columns: 110px 1fr auto;
+  gap: 20px; align-items: center;
+  padding: 22px 30px;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s ease;
+}
+.spread-row:last-child { border-bottom: none; }
+.spread-row:hover { background: var(--ink-raised); }
+.spread-row .rimg { overflow: hidden; border: 1px solid var(--line); }
+.spread-row img { aspect-ratio: 3/4; object-fit: cover; width: 100%; }
+.spread-row h4 { font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.02em; }
+.spread-row .rmeta { font-size: 12px; color: var(--ash); margin-top: 4px; text-transform: lowercase; }
+.spread-row .rprice { color: var(--brass-lt); font-size: 14px; white-space: nowrap; }
+
+/* ---------- craft / story split (mirrored vs before: image right) ---------- */
+.story {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
+  align-items: center;
+}
+.story-copy h2 { font-size: clamp(30px, 3.6vw, 46px); text-transform: uppercase; margin-bottom: 26px; }
+.story-copy p { max-width: 480px; margin-bottom: 18px; font-size: 16px; }
+.story-stats { display: flex; gap: 46px; margin-top: 40px; }
+.story-stats div strong { display: block; font-family: var(--font-display); font-size: 32px; color: var(--paper); font-style: italic; }
+.story-stats div span { font-size: 11.5px; color: var(--ash); text-transform: uppercase; letter-spacing: 0.06em; }
+.story-media { position: relative; border: 1px solid var(--line); background: var(--garnet-deep); }
+.story-media img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+.story-media .frame-tag {
+  position: absolute; right: -1px; bottom: -1px; background: var(--ink); border: 1px solid var(--line);
+  padding: 10px 16px; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brass-lt);
+}
+
+/* ---------- shop header + horizontal filter bar ---------- */
+.shop-header { padding: 156px 0 44px; }
+.shop-header .eyebrow { display: block; margin-bottom: 16px; }
+.shop-header h1 { font-size: clamp(40px, 5.4vw, 60px); text-transform: uppercase; }
+.shop-header p { margin-top: 18px; max-width: 500px; }
+
+.filter-bar {
+  position: sticky; top: 78px; z-index: 300;
+  background: rgba(12,10,8,0.92); backdrop-filter: blur(8px);
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  padding: 18px 0;
+}
+.filter-bar-inner { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.chip-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip {
+  background: none; border: 1px solid var(--line); color: var(--paper-dim);
+  font-family: var(--font-body); font-size: 12px; letter-spacing: 0.04em;
+  cursor: pointer; padding: 8px 16px; border-radius: 999px;
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+  white-space: nowrap;
+}
+.chip:hover { border-color: var(--brass-lt); color: var(--paper); }
+.chip.active { background: var(--garnet); border-color: var(--garnet); color: var(--paper); }
+.search-field {
+  background: var(--ink-raised); border: 1px solid var(--line); color: var(--paper);
+  padding: 10px 16px; font-family: var(--font-body); font-size: 13px; border-radius: 999px;
+  min-width: 220px;
+}
+.search-field::placeholder { color: var(--ash); }
+.search-field:focus { outline: none; border-color: var(--brass-lt); }
+.filter-bar select {
+  background: var(--ink-raised); color: var(--paper-dim); border: 1px solid var(--line);
+  padding: 10px 14px; font-family: var(--font-body); font-size: 12.5px; border-radius: 999px;
+  margin-left: auto;
+}
+
+.results-bar { padding: 26px 0 10px; color: var(--ash); font-size: 12.5px; letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* masonry-ish rhythm: every 5th card spans two columns on wide screens */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: start;
+  gap: 2px;
+  background: var(--line);
+  padding-bottom: 90px;
+}
+.product-card {
+  cursor: pointer;
+  background: var(--ink);
+  position: relative;
+}
+.product-card:nth-child(10n+3) { grid-column: span 2; }
+.product-card:nth-child(10n+3) img { aspect-ratio: 3/2; object-position: center 30%; }
+.product-card .pimg-wrap { position: relative; overflow: hidden; }
+.product-card img {
+  width: 100%; aspect-ratio: 3/4; object-fit: cover;
+  transition: transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+.product-card:hover img { transform: scale(1.05); }
+/* glint sweep: a diagonal light streak on hover, like light catching velvet */
+.product-card .pimg-wrap::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.16) 50%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 0.85s ease;
+  pointer-events: none;
+}
+.product-card:hover .pimg-wrap::after { transform: translateX(120%); }
+.product-card .quick-add {
+  position: absolute; left: 14px; right: 14px; bottom: 14px;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  padding: 11px; text-align: center; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  background: rgba(12,10,8,0.86); border: 1px solid var(--brass-lt); color: var(--paper);
+}
+.product-card:hover .quick-add, .product-card:active .quick-add { opacity: 1; transform: translateY(0); }
+.product-card .pinfo { padding: 18px 20px 24px; display: flex; justify-content: space-between; gap: 10px; }
+.product-card h4 { font-size: 14.5px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.02em; }
+.product-card .pmeta { font-size: 11.5px; color: var(--ash); margin-top: 5px; text-transform: lowercase; }
+.product-card .pprice { color: var(--brass-lt); font-size: 13.5px; white-space: nowrap; }
+
+.load-more { display: flex; justify-content: center; padding-bottom: 100px; }
+.empty-state { padding: 60px 0; text-align: center; color: var(--ash); display: none; }
+.empty-state.show { display: block; }
+
+/* ---------- quick view modal ---------- */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 900; background: rgba(6,5,4,0.8); backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center; padding: 30px;
+  opacity: 0; pointer-events: none; transition: opacity 0.35s ease;
+}
+.modal-backdrop.open { opacity: 1; pointer-events: auto; }
+.modal-panel {
+  background: var(--ink-raised); border: 1px solid var(--line); max-width: 880px; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr;
+  transform: translateY(16px) scale(0.98); transition: transform 0.35s ease;
+  max-height: 86vh; overflow: auto;
+}
+.modal-backdrop.open .modal-panel { transform: translateY(0) scale(1); }
+.modal-media { background: var(--ink); }
+.modal-media img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 3/4; }
+.modal-info { padding: 44px 40px; position: relative; }
+.modal-close { position: absolute; top: 18px; right: 18px; background: none; border: none; color: var(--ash); font-size: 22px; cursor: pointer; line-height: 1; }
+.modal-close:hover { color: var(--paper); }
+.modal-info .eyebrow { margin-bottom: 14px; display: block; }
+.modal-info h3 { font-size: 26px; text-transform: uppercase; margin-bottom: 12px; }
+.modal-info .mprice { color: var(--brass-lt); font-size: 17px; margin-bottom: 22px; display: block; }
+.modal-info p { margin-bottom: 26px; }
+.modal-info .ref { font-size: 11.5px; color: var(--ash); margin-top: 20px; display: block; letter-spacing: 0.04em; }
+
+/* ---------- footer ---------- */
+.site-footer { border-top: 1px solid var(--line); padding: 90px 0 44px; }
+.footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 64px; }
+.footer-grid h5 { font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brass-lt); margin-bottom: 18px; font-weight: 500; font-family: var(--font-body); }
+.footer-grid a, .footer-grid p { font-size: 13.5px; color: var(--paper-dim); display: block; margin-bottom: 10px; }
+.footer-grid a:hover { color: var(--paper); }
+.footer-brand .brand { text-align: left; margin-bottom: 16px; }
+.footer-brand p { max-width: 280px; color: var(--ash); }
+.footer-form { display: flex; margin-top: 14px; border-bottom: 1px solid var(--line); padding-bottom: 9px; }
+.footer-form input { background: none; border: none; color: var(--paper); font-family: var(--font-body); font-size: 13.5px; flex: 1; padding: 4px 0; }
+.footer-form input::placeholder { color: var(--ash); }
+.footer-form input:focus { outline: none; }
+.footer-form button { background: none; border: none; color: var(--brass-lt); cursor: pointer; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); padding-top: 28px; font-size: 11.5px; letter-spacing: 0.03em; color: var(--ash); }
+
+/* ---------- toast ---------- */
+.toast {
+  position: fixed; bottom: 26px; left: 50%; transform: translate(-50%, 12px);
+  background: var(--ink-raised); border: 1px solid var(--brass-lt); color: var(--paper);
+  padding: 14px 22px; font-size: 13px; letter-spacing: 0.02em; border-radius: var(--radius); z-index: 1000;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 980px) {
+  .hero { grid-template-columns: 1fr; padding-top: 150px; }
+  .helix-stage { height: 460px; margin-top: 40px; }
+  .story { grid-template-columns: 1fr; gap: 44px; }
+  .story-media { order: -1; }
+  .editorial-spread { grid-template-columns: 1fr; }
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+  .product-card:nth-child(10n+3) { grid-column: span 1; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .filter-bar select { margin-left: 0; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 0 22px; }
+  .site-nav { padding: 20px 22px; grid-template-columns: auto auto; }
+  .nav-links { display: none; }
+  .brand { grid-column: 1; text-align: left; }
+  .nav-toggle { display: flex; }
+  .site-nav .nav-links.right { display: none; }
+  .modal-panel { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .spread-row { grid-template-columns: 70px 1fr; grid-template-areas: "img title" "img price"; }
+  .filter-bar-inner { gap: 14px; }
+}
+
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-links">
+    <a href="index.html" class="current">Home</a>
+    <a href="shop.html">Shop</a>
+  </div>
+  <a href="index.html" class="brand">Solenne <em>Vane</em></a>
+  <div class="nav-links right">
+    <a href="index.html#atelier">Atelier</a>
+    <a href="shop.html" class="bag-btn">Bag (<span data-bag-count>0</span>)</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-spotlight"></div>
+  <div class="hero-copy">
+    <span class="eyebrow">Dresses &amp; accessories, made to order</span>
+    <h1>Cut for the <em>quiet</em> room, not the loud one.</h1>
+    <p class="lede">Solenne Vane works gowns in garnet velvet and brass-thread jacquard, and finishes each accessory by hand in aged leather and burnished brass — 110 pieces this season, each made only once ordered.</p>
+    <div class="hero-actions">
+      <a href="shop.html" class="btn solid">Enter the shop</a>
+      <a href="index.html#atelier" class="btn ghost">The workroom</a>
+    </div>
+  </div>
+
+  <div class="helix-stage">
+    <div class="helix-anchor" id="helix-anchor">
+      <div class="helix-axis"></div>
+      <div class="helix-tier-label"><span class="eyebrow">This season</span><span class="num">110</span></div>
+
+      <div class="helix-tier" style="top: 10%;">
+        <div class="helix-item"><figure><img loading="lazy" alt=""><figcaption></figcaption></figure></div>
+        <div class="helix-item"><figure><img loading="lazy" alt=""><figcaption></figcaption></figure></div>
+        <div class="helix-item"><figure><img loading="lazy" alt=""><figcaption></figcaption></figure></div>
+      </div>
+      <div class="helix-tier" style="top: 44%;">
+        <div class="helix-item"><figure><img loading="lazy" alt=""><figcaption></figcaption></figure></div>
+        <div class="helix-item"><figure><img loading="lazy" alt=""><figcaption></figcaption></figure></div>
+        <div class="helix-item"><figure><img loading="lazy" alt=""><figcaption></figcaption></figure></div>
+      </div>
+      <div class="helix-tier" style="top: 78%;">
+        <div class="helix-item"><figure><img loading="lazy" alt=""><figcaption></figcaption></figure></div>
+        <div class="helix-item"><figure><img loading="lazy" alt=""><figcaption></figcaption></figure></div>
+        <div class="helix-item"><figure><img loading="lazy" alt=""><figcaption></figcaption></figure></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue"><span class="line"></span>Scroll</div>
+</header>
+
+<div class="ticker-band">
+  <div class="ticker-track">
+    <span>Made to order <b>·</b> Garnet velvet &amp; brass thread <b>·</b> 110 pieces this season <b>·</b> No stock, no rush <b>·</b> Made to order <b>·</b> Garnet velvet &amp; brass thread <b>·</b> 110 pieces this season <b>·</b> No stock, no rush <b>·</b></span>
+  </div>
+</div>
+
+<section class="section" id="featured">
+  <div class="wrap">
+    <div class="featured-head">
+      <span class="eyebrow">This season</span>
+      <h2>Where to begin</h2>
+      <p>One gown, and three pieces worth knowing alongside it. The rest of the 110 are in the shop.</p>
+    </div>
+    <div class="editorial-spread" id="editorial-spread"></div>
+  </div>
+</section>
+
+<section class="section tight" id="atelier">
+  <div class="wrap">
+    <div class="story">
+      <div class="story-copy">
+        <span class="eyebrow">The workroom</span>
+        <h2>Nothing is made until it's ordered.</h2>
+        <p>Solenne Vane keeps no stockroom. A dress is cut only once it's been asked for — pattern, fitting, and finish, in that order, by the same two hands each time. Bronze thread pulled tight by eye, hems felled by hand.</p>
+        <p>Leather is aged in small batches, velvet is cut against the grain on purpose — the kind of detail that only shows once you're wearing it.</p>
+        <div class="story-stats">
+          <div><strong>110</strong><span>Pieces this season</span></div>
+          <div><strong>3</strong><span>Weeks, made to order</span></div>
+          <div><strong>2</strong><span>Hands per garment</span></div>
+        </div>
+      </div>
+      <div class="story-media">
+        <img id="atelier-img" alt="The Solenne Vane workroom crest">
+        <span class="frame-tag">The workroom</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">Solenne <em>Vane</em></a>
+        <p>Dresses and accessories cut in garnet velvet, brass and aged leather. Made to order, one piece at a time.</p>
+        <!-- Pre-launch: point this at a real endpoint (e.g. https://formspree.io) — see README.md -->
+        <form class="footer-form" data-newsletter-form>
+          <input type="email" placeholder="Your email, for new pieces" required>
+          <button type="submit">Join</button>
+        </form>
+      </div>
+      <div>
+        <h5>Shop</h5>
+        <a href="shop.html">All pieces</a>
+        <a href="shop.html">Dresses</a>
+        <a href="shop.html">Accessories</a>
+      </div>
+      <div>
+        <h5>The house</h5>
+        <a href="index.html#atelier">The workroom</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="index.html">Care &amp; repair</a>
+      </div>
+      <div>
+        <h5>Visit</h5>
+        <p>By appointment only</p>
+        <p>Replies within two working days</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Solenne Vane. All pieces made to order.</span>
+      <span>Est. this season</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Solenne Vane — placeholder plate art (self-contained, no third-party photo host).
+   Swap window.SV_plate() call sites for real photography before full launch. */
+
+(function () {
+  "use strict";
+
+  const PALETTES = [
+    ["#4a0f16", "#0c0a08"], // garnet
+    ["#3a2a12", "#0c0a08"], // brass-brown
+    ["#241d13", "#0c0a08"], // olive-smoke
+    ["#2b070c", "#0c0a08"], // deep oxblood
+    ["#191410", "#0c0a08"], // graphite
+    ["#33200d", "#0c0a08"], // copper-brown
+  ];
+
+  const DRESS_ICON =
+    '<path d="M150,68 C133,68 120,80 120,98 C120,118 110,138 101,163 L74,326 C74,342 110,360 150,360 C190,360 226,342 226,326 L199,163 C190,138 180,118 180,98 C180,80 167,68 150,68 Z"/>' +
+    '<path d="M120,98 C132,112 168,112 180,98" />';
+
+  const ACCESSORY_ICON =
+    '<path d="M100,175 q50,-72 100,0" />' +
+    '<rect x="86" y="175" width="128" height="128" rx="14"/>' +
+    '<circle cx="150" cy="208" r="5.5" fill="#c99566" stroke="none"/>';
+
+  function hash(str) {
+    let h = 0;
+    for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
+    return h;
+  }
+
+  function svgWrap(inner) {
+    return "data:image/svg+xml;utf8," + encodeURIComponent(inner);
+  }
+
+  function plate(product) {
+    const [c1, c2] = PALETTES[hash(product.id) % PALETTES.length];
+    const isDress = product.category === "Dresses";
+    const icon = isDress ? DRESS_ICON : ACCESSORY_ICON;
+    const letter = (product.name.trim()[0] || "S").toUpperCase();
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400">
+        <defs>
+          <radialGradient id="g" cx="50%" cy="30%" r="80%">
+            <stop offset="0%" stop-color="${c1}"/>
+            <stop offset="100%" stop-color="${c2}"/>
+          </radialGradient>
+          <linearGradient id="sheen" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="35%" stop-color="#ffffff" stop-opacity="0"/>
+            <stop offset="48%" stop-color="#ffffff" stop-opacity="0.05"/>
+            <stop offset="60%" stop-color="#ffffff" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <rect width="300" height="400" fill="url(#g)"/>
+        <rect width="300" height="400" fill="url(#sheen)"/>
+        <rect x="7" y="7" width="286" height="386" fill="none" stroke="rgba(201,149,102,0.3)" stroke-width="1"/>
+        <text x="150" y="270" font-family="Georgia, 'Times New Roman', serif" font-style="italic"
+              font-size="230" fill="rgba(201,149,102,0.09)" text-anchor="middle">${letter}</text>
+        <g fill="none" stroke="#c99566" stroke-width="2" opacity="0.88" transform="translate(0,-6)">${icon}</g>
+        <text x="150" y="378" font-family="Georgia, serif" font-size="11.5" letter-spacing="1.5"
+              fill="rgba(239,230,216,0.5)" text-anchor="middle">${product.material.toUpperCase()}</text>
+      </svg>`;
+    return svgWrap(svg);
+  }
+
+  function crest(label1, label2) {
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 860">
+        <defs>
+          <radialGradient id="cg" cx="50%" cy="36%" r="75%">
+            <stop offset="0%" stop-color="#2b1610"/>
+            <stop offset="100%" stop-color="#0c0a08"/>
+          </radialGradient>
+        </defs>
+        <rect width="700" height="860" fill="url(#cg)"/>
+        <circle cx="350" cy="400" r="150" fill="none" stroke="rgba(201,149,102,0.5)" stroke-width="1.5"/>
+        <circle cx="350" cy="400" r="128" fill="none" stroke="rgba(201,149,102,0.28)" stroke-width="1"/>
+        <text x="350" y="418" font-family="Georgia, serif" font-style="italic" font-size="60"
+              fill="#c99566" text-anchor="middle">SV</text>
+        <text x="350" y="600" font-family="Georgia, serif" font-size="16" letter-spacing="3"
+              fill="rgba(239,230,216,0.55)" text-anchor="middle">${label1 || ""}</text>
+        <text x="350" y="628" font-family="Georgia, serif" font-size="13" letter-spacing="2"
+              fill="rgba(239,230,216,0.35)" text-anchor="middle">${label2 || ""}</text>
+      </svg>`;
+    return svgWrap(svg);
+  }
+
+  function favicon() {
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <rect width="64" height="64" fill="#0c0a08"/>
+        <circle cx="32" cy="32" r="26" fill="none" stroke="#c99566" stroke-width="2"/>
+        <text x="32" y="41" font-family="Georgia, serif" font-style="italic" font-size="24"
+              fill="#c99566" text-anchor="middle">SV</text>
+      </svg>`;
+    return svgWrap(svg);
+  }
+
+  window.SV_plate = plate;
+  window.SV_crest = crest;
+  window.SV_favicon = favicon;
+})();
+
+</script>
+<script>
+/* Solenne Vane — catalog data (110 pieces, deterministically generated) */
+
+(function () {
+  const DRESS_ADJ = [
+    "Garnet", "Vellum", "Dusk", "Brasswork", "Oxblood", "Parchment",
+    "Nocturn", "Scarlet", "Umbral", "Verdigris", "Alabaster", "Tallow",
+    "Rouge", "Cinder", "Mourning", "Antique", "Filigreed", "Draped",
+    "Hollow", "Vane",
+  ];
+  const DRESS_NOUN = [
+    "Column Gown", "Wrap Dress", "Cape Dress", "Bias Gown", "Halter Gown",
+    "Tailored Coat Dress", "Draped Gown", "Corseted Dress", "Sheath Dress",
+    "Opera Gown", "Cocktail Dress", "Trench Dress", "Velvet Robe Dress",
+    "Slip Dress", "Godet Gown",
+  ];
+  const DRESS_MATERIAL = [
+    "garnet velvet", "brass-thread jacquard", "oxblood taffeta",
+    "aged tulle", "duchesse satin", "black mohair", "claret chiffon",
+    "wool crêpe", "copper lamé", "shadow silk faille", "burnt organza",
+    "tarnished satin",
+  ];
+
+  const ACC_ADJ = [
+    "Vane", "Solenne", "Rivoux", "Ashgrove", "Marchant", "Delvane",
+    "Corbeau", "Ferro", "Aubrienne", "Castellane", "Thorn", "Wrenlow",
+    "Duvane", "Ilette", "Marrow",
+  ];
+  const ACC_NOUN = [
+    "Clutch", "Structured Tote", "Leather Gloves", "Silk Foulard", "Belt",
+    "Brooch", "Cuff Bracelet", "Drop Earrings", "Evening Bag", "Card Case",
+    "Choker", "Hair Comb", "Opera Bag", "Signet Ring", "Cravat Pin",
+  ];
+  const ACC_MATERIAL = [
+    "brushed brass", "aged garnet leather", "oxidized copper",
+    "smoked pewter", "waxed hide", "antique brass", "black enamel",
+    "burnished bronze", "hand-tooled leather", "dark vermeil",
+    "patinated steel",
+  ];
+
+  function money(base, step) {
+    return Math.round((base + step) / 5) * 5 - 1;
+  }
+
+  function buildDresses(count) {
+    const items = [];
+    for (let i = 0; i < count; i++) {
+      const adj = DRESS_ADJ[i % DRESS_ADJ.length];
+      const noun = DRESS_NOUN[(i * 7) % DRESS_NOUN.length];
+      const material = DRESS_MATERIAL[(i * 5) % DRESS_MATERIAL.length];
+      items.push({
+        id: "SV-D" + String(100 + i),
+        name: `${adj} ${noun}`,
+        category: "Dresses",
+        subcategory: noun.includes("Gown") ? "Gowns" : "Dresses",
+        material: material,
+        price: money(440, (i * 37) % 900),
+        blurb: `Cut in ${material}, finished by hand with a brass-thread hem.`,
+      });
+    }
+    return items;
+  }
+
+  function buildAccessories(count) {
+    const items = [];
+    for (let i = 0; i < count; i++) {
+      const adj = ACC_ADJ[i % ACC_ADJ.length];
+      const noun = ACC_NOUN[(i * 4) % ACC_NOUN.length];
+      const material = ACC_MATERIAL[(i * 3) % ACC_MATERIAL.length];
+      items.push({
+        id: "SV-A" + String(200 + i),
+        name: `${adj} ${noun}`,
+        category: "Accessories",
+        subcategory: noun,
+        material: material,
+        price: money(170, (i * 29) % 620),
+        blurb: `Worked in ${material}, aged by hand for a lived-in shine.`,
+      });
+    }
+    return items;
+  }
+
+  window.SV_PRODUCTS = [...buildDresses(60), ...buildAccessories(50)];
+})();
+
+</script>
+<script>
+/* Solenne Vane — shared site behaviour */
+
+(function () {
+  "use strict";
+
+  /* ---------- cart (persisted, visual only) ---------- */
+  const Cart = {
+    key: "sv_bag",
+    read() {
+      try { return JSON.parse(localStorage.getItem(this.key)) || []; }
+      catch (e) { return []; }
+    },
+    write(items) {
+      localStorage.setItem(this.key, JSON.stringify(items));
+      this.renderCount();
+    },
+    add(id) {
+      const items = this.read();
+      items.push(id);
+      this.write(items);
+    },
+    renderCount() {
+      const n = this.read().length;
+      document.querySelectorAll("[data-bag-count]").forEach((el) => { el.textContent = n; });
+    },
+  };
+  window.SV_Cart = Cart;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    Cart.renderCount();
+    initFavicon();
+    initNav();
+    initMobileNav();
+    initToast();
+    initSpotlight();
+    initHelix();
+    initFooterForm();
+  });
+
+  /* ---------- favicon ---------- */
+  function initFavicon() {
+    if (!window.SV_favicon || document.querySelector('link[rel="icon"]')) return;
+    const link = document.createElement("link");
+    link.rel = "icon";
+    link.type = "image/svg+xml";
+    link.href = window.SV_favicon();
+    document.head.appendChild(link);
+  }
+
+  /* ---------- nav ---------- */
+  function initNav() {
+    const nav = document.querySelector(".site-nav");
+    if (!nav) return;
+    const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  /* ---------- mobile nav ---------- */
+  function initMobileNav() {
+    const nav = document.querySelector(".site-nav");
+    const linkGroups = document.querySelectorAll(".nav-links");
+    if (!nav || !linkGroups.length) return;
+
+    const toggle = document.createElement("button");
+    toggle.className = "nav-toggle";
+    toggle.setAttribute("aria-label", "Open menu");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.innerHTML = "<span></span><span></span><span></span>";
+    nav.appendChild(toggle);
+
+    const allLinks = [];
+    linkGroups.forEach((g) => allLinks.push(g.innerHTML));
+    const panel = document.createElement("div");
+    panel.className = "mobile-nav";
+    panel.innerHTML = allLinks.join("");
+    document.body.appendChild(panel);
+
+    function setOpen(open) {
+      panel.classList.toggle("open", open);
+      toggle.classList.toggle("open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      document.body.style.overflow = open ? "hidden" : "";
+    }
+    toggle.addEventListener("click", () => setOpen(!panel.classList.contains("open")));
+    panel.addEventListener("click", (e) => { if (e.target.tagName === "A") setOpen(false); });
+    window.addEventListener("resize", () => { if (window.innerWidth > 640) setOpen(false); });
+  }
+
+  /* ---------- toast ---------- */
+  function initToast() {
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.setAttribute("role", "status");
+    document.body.appendChild(toast);
+    window.SV_toast = (msg) => {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(window.__sv_toast_t);
+      window.__sv_toast_t = setTimeout(() => toast.classList.remove("show"), 2200);
+    };
+  }
+
+  /* ---------- cursor spotlight (the hero "touch" effect) ---------- */
+  function initSpotlight() {
+    const hero = document.querySelector(".hero");
+    const glow = document.querySelector(".hero-spotlight");
+    if (!hero || !glow) return;
+    hero.addEventListener("pointermove", (e) => {
+      const r = hero.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width) * 100;
+      const y = ((e.clientY - r.top) / r.height) * 100;
+      glow.style.setProperty("--sx", x + "%");
+      glow.style.setProperty("--sy", y + "%");
+    });
+  }
+
+  /* ---------- vertical helix ----------
+     Three tiers of items spiral around a vertical axis, each tier turning
+     at a slightly different speed and bobbing gently on its own sine wave —
+     a chandelier of garments rather than a flat orbit ring. */
+  function initHelix() {
+    const stage = document.querySelector(".helix-stage");
+    const anchor = document.querySelector(".helix-anchor");
+    if (!stage || !anchor) return;
+
+    const tiers = Array.from(anchor.querySelectorAll(".helix-tier"));
+    if (!tiers.length) return;
+
+    if (window.SV_PRODUCTS && window.SV_plate) {
+      const picks = [3, 55, 21, 88, 40, 100, 12, 65, 30];
+      let idx = 0;
+      tiers.forEach((tier) => {
+        tier.querySelectorAll(".helix-item").forEach((item) => {
+          const p = window.SV_PRODUCTS[picks[idx % picks.length]];
+          idx++;
+          if (!p) return;
+          const img = item.querySelector("img");
+          const cap = item.querySelector("figcaption");
+          if (img) { img.src = window.SV_plate(p); img.alt = p.name; }
+          if (cap) cap.textContent = p.name;
+        });
+      });
+    }
+
+    const radius = Math.min(stage.clientWidth, 340) * 0.42;
+    let t = 0;
+    let speed = 0.0028;
+    let targetSpeed = speed;
+
+    stage.addEventListener("pointerenter", () => { targetSpeed = 0.001; });
+    stage.addEventListener("pointerleave", () => { targetSpeed = 0.0028; });
+
+    function frame() {
+      t += 1;
+      speed += (targetSpeed - speed) * 0.03;
+
+      tiers.forEach((tier, ti) => {
+        const dir = ti % 2 === 0 ? 1 : -1;
+        const tierSpeed = speed * (1 + ti * 0.18) * dir;
+        const angleBase = t * tierSpeed;
+        const bob = Math.sin(t * 0.01 + ti) * 6;
+        const items = tier.querySelectorAll(".helix-item");
+        const n = items.length;
+        items.forEach((item, i) => {
+          const a = angleBase + (i / n) * Math.PI * 2;
+          const x = Math.cos(a) * radius;
+          const depth = Math.sin(a);
+          const scale = 0.68 + (depth + 1) / 2 * 0.42;
+          const opacity = 0.4 + (depth + 1) / 2 * 0.6;
+          const z = Math.round(depth * 100);
+          item.style.transform = `translate(-50%, 0) translate(${x}px, ${bob}px) scale(${scale})`;
+          item.style.opacity = opacity.toFixed(2);
+          item.style.zIndex = 100 + z;
+        });
+      });
+
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- footer newsletter ---------- */
+  function initFooterForm() {
+    const form = document.querySelector(".footer-form");
+    if (!form) return;
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const input = form.querySelector("input");
+      if (input && input.value.trim()) {
+        window.SV_toast && window.SV_toast("You're on the list.");
+        input.value = "";
+      }
+    });
+  }
+})();
+
+</script>
+<script>
+  (function () {
+    const heroIdx = 5, sideIdx = [23, 70, 95];
+    const money = (n) => "€" + n.toLocaleString("en-IE");
+    const hero = window.SV_PRODUCTS[heroIdx];
+    const rows = sideIdx.map((i) => window.SV_PRODUCTS[i]);
+    const spread = document.getElementById("editorial-spread");
+    spread.innerHTML = `
+      <a class="spread-hero" href="shop.html">
+        <div class="simg-wrap"><img loading="lazy" src="${window.SV_plate(hero)}" alt="${hero.name}"></div>
+        <div class="sinfo"><h3>${hero.name}</h3><div class="sprice">${money(hero.price)}</div></div>
+      </a>
+      <div class="spread-list">
+        ${rows.map((p) => `
+          <a class="spread-row" href="shop.html">
+            <div class="rimg"><img loading="lazy" src="${window.SV_plate(p)}" alt="${p.name}"></div>
+            <div>
+              <h4>${p.name}</h4>
+              <div class="rmeta">${p.material}</div>
+            </div>
+            <div class="rprice">${money(p.price)}</div>
+          </a>`).join("")}
+      </div>`;
+
+    const atelierImg = document.getElementById("atelier-img");
+    if (atelierImg) atelierImg.src = window.SV_crest("SOLENNE VANE", "MADE TO ORDER");
+  })();
+</script>
+</body>
+</html>

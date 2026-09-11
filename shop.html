@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop — Solenne Vane</title>
+<meta name="description" content="The full Solenne Vane collection: 110 dresses and accessories, made to order.">
+<link rel="canonical" href="https://asif3761.github.io/SOLENNE-VANE/shop.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Shop — Solenne Vane">
+<meta property="og:description" content="The full Solenne Vane collection: 110 dresses and accessories, made to order.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav scrolled">
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="shop.html" class="current">Shop</a>
+  </div>
+  <a href="index.html" class="brand">Solenne <em>Vane</em></a>
+  <div class="nav-links right">
+    <a href="index.html#atelier">Atelier</a>
+    <a href="shop.html" class="bag-btn">Bag (<span data-bag-count>0</span>)</a>
+  </div>
+</nav>
+
+<div class="wrap shop-header">
+  <span class="eyebrow">110 pieces, made to order</span>
+  <h1>The full collection</h1>
+  <p>Dresses cut in garnet velvet and oxblood taffeta; accessories worked in aged leather and burnished brass.</p>
+</div>
+
+<div class="filter-bar">
+  <div class="wrap filter-bar-inner">
+    <div class="chip-row" id="category-filters"></div>
+    <div class="chip-row" id="subcategory-filters"></div>
+    <input type="search" id="search-field" class="search-field" placeholder="Search name or material">
+    <select id="sort-select">
+      <option value="featured">Featured</option>
+      <option value="price-asc">Price, low–high</option>
+      <option value="price-desc">Price, high–low</option>
+      <option value="name">Name, A–Z</option>
+    </select>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="results-bar" id="results-count">110 pieces</div>
+</div>
+
+<div class="product-grid" id="product-grid"></div>
+<p class="wrap empty-state" id="empty-state">Nothing matches that search — try a different material or clear the filter.</p>
+<div class="load-more"><button class="btn ghost" id="load-more">Show more pieces</button></div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">Solenne <em>Vane</em></a>
+        <p>Dresses and accessories cut in garnet velvet, brass and aged leather. Made to order, one piece at a time.</p>
+        <!-- Pre-launch: point this at a real endpoint (e.g. https://formspree.io) — see README.md -->
+        <form class="footer-form" data-newsletter-form>
+          <input type="email" placeholder="Your email, for new pieces" required>
+          <button type="submit">Join</button>
+        </form>
+      </div>
+      <div>
+        <h5>Shop</h5>
+        <a href="shop.html">All pieces</a>
+        <a href="shop.html">Dresses</a>
+        <a href="shop.html">Accessories</a>
+      </div>
+      <div>
+        <h5>The house</h5>
+        <a href="index.html#atelier">The workroom</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="index.html">Care &amp; repair</a>
+      </div>
+      <div>
+        <h5>Visit</h5>
+        <p>By appointment only</p>
+        <p>Replies within two working days</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Solenne Vane. All pieces made to order.</span>
+      <span>Est. this season</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal-panel">
+    <div class="modal-media" id="modal-media"></div>
+    <div class="modal-info" id="modal-info"></div>
+  </div>
+</div>
+
+<script src="js/plate.js"></script>
+<script src="js/products.js"></script>
+<script src="js/main.js"></script>
+<script src="js/shop.js"></script>
+</body>
+</html>
