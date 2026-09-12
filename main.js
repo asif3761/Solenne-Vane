@@ -1,49 +1,51 @@
-/* Solenne Vane — shared site behaviour */
+/* Solenne Vane — editorial motion behaviour */
 
 (function () {
   "use strict";
 
+  let FINE_POINTER = false;
+  try { FINE_POINTER = window.matchMedia("(hover: hover) and (pointer: fine)").matches; }
+  catch (e) { FINE_POINTER = false; }
+
   /* ---------- cart (persisted, visual only) ---------- */
   const Cart = {
     key: "sv_bag",
-    read() {
-      try { return JSON.parse(localStorage.getItem(this.key)) || []; }
-      catch (e) { return []; }
-    },
-    write(items) {
-      localStorage.setItem(this.key, JSON.stringify(items));
-      this.renderCount();
-    },
-    add(id) {
-      const items = this.read();
-      items.push(id);
-      this.write(items);
-    },
+    read() { try { return JSON.parse(localStorage.getItem(this.key)) || []; } catch (e) { return []; } },
+    write(items) { try { localStorage.setItem(this.key, JSON.stringify(items)); } catch (e) { /* storage unavailable — cart stays in-memory for this view */ } this.renderCount(); },
+    add(id) { const items = this.read(); items.push(id); this.write(items); },
     renderCount() {
-      const n = this.read().length;
-      document.querySelectorAll("[data-bag-count]").forEach((el) => { el.textContent = n; });
+      try {
+        const n = this.read().length;
+        document.querySelectorAll("[data-bag-count]").forEach((el) => { el.textContent = n; });
+      } catch (e) { /* non-critical */ }
     },
   };
   window.SV_Cart = Cart;
 
   document.addEventListener("DOMContentLoaded", () => {
-    Cart.renderCount();
-    initFavicon();
-    initNav();
-    initMobileNav();
-    initToast();
-    initSpotlight();
-    initHelix();
-    initFooterForm();
+    // Reveal runs first and is the most important for basic visibility —
+    // if anything below throws, page content must never stay invisible.
+    safe(initReveal);
+    safe(() => Cart.renderCount());
+    safe(initFavicon);
+    safe(initNav);
+    safe(initMobileNav);
+    safe(initToast);
+    safe(initCursor);
+    safe(initPageTransitions);
+    safe(initLookbook);
+    safe(initFooterForm);
   });
+
+  function safe(fn) {
+    try { fn(); } catch (e) { console.warn("Solenne Vane: a non-critical feature failed to start —", e); }
+  }
 
   /* ---------- favicon ---------- */
   function initFavicon() {
     if (!window.SV_favicon || document.querySelector('link[rel="icon"]')) return;
     const link = document.createElement("link");
-    link.rel = "icon";
-    link.type = "image/svg+xml";
-    link.href = window.SV_favicon();
+    link.rel = "icon"; link.type = "image/svg+xml"; link.href = window.SV_favicon();
     document.head.appendChild(link);
   }
 
@@ -101,83 +103,122 @@
     };
   }
 
-  /* ---------- cursor spotlight (the hero "touch" effect) ---------- */
-  function initSpotlight() {
-    const hero = document.querySelector(".hero");
-    const glow = document.querySelector(".hero-spotlight");
-    if (!hero || !glow) return;
-    hero.addEventListener("pointermove", (e) => {
-      const r = hero.getBoundingClientRect();
-      const x = ((e.clientX - r.left) / r.width) * 100;
-      const y = ((e.clientY - r.top) / r.height) * 100;
-      glow.style.setProperty("--sx", x + "%");
-      glow.style.setProperty("--sy", y + "%");
+  /* ---------- custom cursor ----------
+     A small dot tracks the pointer exactly; a ring trails it with easing
+     and expands into a "View" label over products, or a soft glow over
+     links and buttons. Desktop fine-pointer only — untouched on mobile. */
+  function initCursor() {
+    if (!FINE_POINTER) return;
+    const dot = document.createElement("div");
+    dot.className = "cursor-dot";
+    const ring = document.createElement("div");
+    ring.className = "cursor-ring";
+    document.body.append(dot, ring);
+
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    let rx = mx, ry = my;
+    let active = false;
+
+    window.addEventListener("pointermove", (e) => {
+      mx = e.clientX; my = e.clientY;
+      if (!active) { active = true; document.documentElement.classList.add("cursor-ready"); }
+      dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
     });
-  }
-
-  /* ---------- vertical helix ----------
-     Three tiers of items spiral around a vertical axis, each tier turning
-     at a slightly different speed and bobbing gently on its own sine wave —
-     a chandelier of garments rather than a flat orbit ring. */
-  function initHelix() {
-    const stage = document.querySelector(".helix-stage");
-    const anchor = document.querySelector(".helix-anchor");
-    if (!stage || !anchor) return;
-
-    const tiers = Array.from(anchor.querySelectorAll(".helix-tier"));
-    if (!tiers.length) return;
-
-    if (window.SV_PRODUCTS && window.SV_plate) {
-      const picks = [3, 55, 21, 88, 40, 100, 12, 65, 30];
-      let idx = 0;
-      tiers.forEach((tier) => {
-        tier.querySelectorAll(".helix-item").forEach((item) => {
-          const p = window.SV_PRODUCTS[picks[idx % picks.length]];
-          idx++;
-          if (!p) return;
-          const img = item.querySelector("img");
-          const cap = item.querySelector("figcaption");
-          if (img) { img.src = window.SV_plate(p); img.alt = p.name; }
-          if (cap) cap.textContent = p.name;
-        });
-      });
-    }
-
-    const radius = Math.min(stage.clientWidth, 340) * 0.42;
-    let t = 0;
-    let speed = 0.0028;
-    let targetSpeed = speed;
-
-    stage.addEventListener("pointerenter", () => { targetSpeed = 0.001; });
-    stage.addEventListener("pointerleave", () => { targetSpeed = 0.0028; });
 
     function frame() {
-      t += 1;
-      speed += (targetSpeed - speed) * 0.03;
-
-      tiers.forEach((tier, ti) => {
-        const dir = ti % 2 === 0 ? 1 : -1;
-        const tierSpeed = speed * (1 + ti * 0.18) * dir;
-        const angleBase = t * tierSpeed;
-        const bob = Math.sin(t * 0.01 + ti) * 6;
-        const items = tier.querySelectorAll(".helix-item");
-        const n = items.length;
-        items.forEach((item, i) => {
-          const a = angleBase + (i / n) * Math.PI * 2;
-          const x = Math.cos(a) * radius;
-          const depth = Math.sin(a);
-          const scale = 0.68 + (depth + 1) / 2 * 0.42;
-          const opacity = 0.4 + (depth + 1) / 2 * 0.6;
-          const z = Math.round(depth * 100);
-          item.style.transform = `translate(-50%, 0) translate(${x}px, ${bob}px) scale(${scale})`;
-          item.style.opacity = opacity.toFixed(2);
-          item.style.zIndex = 100 + z;
-        });
-      });
-
+      rx += (mx - rx) * 0.16;
+      ry += (my - ry) * 0.16;
+      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
       requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
+
+    document.addEventListener("mouseover", (e) => {
+      const viewTarget = e.target.closest(".product-card, .collage-item, .spread-hero, .spread-row");
+      const growTarget = e.target.closest("a, button, .chip");
+      ring.classList.toggle("view", !!viewTarget);
+      ring.classList.toggle("grow", !!growTarget && !viewTarget);
+    });
+    document.addEventListener("mouseout", (e) => {
+      if (!e.relatedTarget) { ring.classList.remove("view", "grow"); }
+    });
+  }
+
+  /* ---------- page transitions ----------
+     Only intercepts links to a different local .html page. Anchors, the
+     current page, and external links behave exactly as normal — the
+     overlay starts off-screen, so nothing depends on this running. */
+  function initPageTransitions() {
+    const overlay = document.createElement("div");
+    overlay.className = "page-transition";
+    document.body.appendChild(overlay);
+
+    document.querySelectorAll('a[href$=".html"]').forEach((a) => {
+      const href = a.getAttribute("href");
+      const here = location.pathname.split("/").pop() || "index.html";
+      if (href === here) return;
+      a.addEventListener("click", (e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+        e.preventDefault();
+        overlay.classList.add("leave");
+        setTimeout(() => { location.href = href; }, 620);
+      });
+    });
+  }
+
+  /* ---------- scroll reveal ---------- */
+  function initReveal() {
+    const targets = document.querySelectorAll(".reveal, .reveal-stagger");
+    if (!targets.length) return;
+
+    let observing = false;
+    try {
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: "0px 0px -60px 0px" });
+        targets.forEach((t) => io.observe(t));
+        observing = true;
+      }
+    } catch (e) { observing = false; }
+
+    if (!observing) {
+      // IntersectionObserver missing or blocked — reveal immediately
+      // rather than leaving content permanently invisible.
+      targets.forEach((t) => t.classList.add("visible"));
+      return;
+    }
+
+    // Fail-safe: even if observing started fine, a restricted preview
+    // frame (odd iframe sizing, no real scroll container) might never
+    // actually fire a callback. Force reveal anything still hidden.
+    setTimeout(() => {
+      document.querySelectorAll(".reveal:not(.visible), .reveal-stagger:not(.visible)")
+        .forEach((t) => t.classList.add("visible"));
+    }, 2000);
+  }
+
+  /* ---------- lookbook: sticky image follows the caption in view ---------- */
+  function initLookbook() {
+    const media = document.querySelector(".lookbook-media");
+    const captions = document.querySelectorAll(".lookbook-caption");
+    if (!media || !captions.length || !("IntersectionObserver" in window)) return;
+    const images = media.querySelectorAll("img");
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const idx = Number(entry.target.dataset.index || 0);
+          images.forEach((img, i) => img.classList.toggle("active", i === idx));
+        }
+      });
+    }, { threshold: 0.55 });
+    captions.forEach((c) => io.observe(c));
   }
 
   /* ---------- footer newsletter ---------- */

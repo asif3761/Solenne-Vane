@@ -31,7 +31,6 @@
       `<button class="chip ${c === state.category ? "active" : ""}" data-cat="${c}">${c}</button>`
     ).join("");
   }
-
   function buildSubChips() {
     const subs = ["All", ...subcategoriesFor(state.category)];
     subRow.innerHTML = subs.map((s) =>
@@ -55,17 +54,18 @@
     return list;
   }
 
-  function cardHTML(p) {
+  function cardHTML(p, i) {
+    const delay = Math.min(i, 11) * 45;
     return `
-      <article class="product-card" data-id="${p.id}" tabindex="0">
+      <article class="product-card rs-item" style="transition-delay:${delay}ms" data-id="${p.id}" tabindex="0">
         <div class="pimg-wrap">
           <img loading="lazy" src="${window.SV_plate(p)}" alt="${p.name}">
-          <div class="quick-add" data-add="${p.id}">Add to bag — ${money(p.price)}</div>
         </div>
         <div class="pinfo">
           <div>
             <h4>${p.name}</h4>
             <div class="pmeta">${p.material} · ${p.id}</div>
+            <div class="quick-add" data-add="${p.id}">Add to bag</div>
           </div>
           <div class="pprice">${money(p.price)}</div>
         </div>
@@ -75,11 +75,14 @@
   function render() {
     const list = filtered();
     const toShow = list.slice(0, state.shown);
+    grid.classList.remove("visible");
+    grid.classList.add("reveal-stagger");
     grid.innerHTML = toShow.map(cardHTML).join("");
     resultsCount.textContent = `${list.length} piece${list.length === 1 ? "" : "s"}`;
     emptyState.classList.toggle("show", list.length === 0);
     loadMoreBtn.style.display = list.length > state.shown ? "inline-flex" : "none";
     attachCardHandlers();
+    requestAnimationFrame(() => requestAnimationFrame(() => grid.classList.add("visible")));
   }
 
   function attachCardHandlers() {
@@ -125,39 +128,26 @@
     modalInfo.querySelector(".modal-close").addEventListener("click", closeModal);
     modalInfo.querySelector("[data-add]").addEventListener("click", () => addToBag(p.id));
   }
-  function closeModal() {
-    backdrop.classList.remove("open");
-    document.body.style.overflow = "";
-  }
+  function closeModal() { backdrop.classList.remove("open"); document.body.style.overflow = ""; }
   backdrop.addEventListener("click", (e) => { if (e.target === backdrop) closeModal(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
   catRow.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-cat]");
     if (!btn) return;
-    state.category = btn.dataset.cat;
-    state.subcategory = "All";
-    state.shown = PAGE_SIZE;
-    buildCategoryChips();
-    buildSubChips();
-    render();
+    state.category = btn.dataset.cat; state.subcategory = "All"; state.shown = PAGE_SIZE;
+    buildCategoryChips(); buildSubChips(); render();
   });
   subRow.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-sub]");
     if (!btn) return;
-    state.subcategory = btn.dataset.sub;
-    state.shown = PAGE_SIZE;
-    buildSubChips();
-    render();
+    state.subcategory = btn.dataset.sub; state.shown = PAGE_SIZE;
+    buildSubChips(); render();
   });
   let searchDebounce;
   searchField.addEventListener("input", (e) => {
     clearTimeout(searchDebounce);
-    searchDebounce = setTimeout(() => {
-      state.query = e.target.value.trim();
-      state.shown = PAGE_SIZE;
-      render();
-    }, 180);
+    searchDebounce = setTimeout(() => { state.query = e.target.value.trim(); state.shown = PAGE_SIZE; render(); }, 180);
   });
   sortSelect.addEventListener("change", (e) => { state.sort = e.target.value; render(); });
   loadMoreBtn.addEventListener("click", () => { state.shown += PAGE_SIZE; render(); });

@@ -56,8 +56,6 @@
         <text x="150" y="270" font-family="Georgia, 'Times New Roman', serif" font-style="italic"
               font-size="230" fill="rgba(201,149,102,0.09)" text-anchor="middle">${letter}</text>
         <g fill="none" stroke="#c99566" stroke-width="2" opacity="0.88" transform="translate(0,-6)">${icon}</g>
-        <text x="150" y="378" font-family="Georgia, serif" font-size="11.5" letter-spacing="1.5"
-              fill="rgba(239,230,216,0.5)" text-anchor="middle">${product.material.toUpperCase()}</text>
       </svg>`;
     return svgWrap(svg);
   }
